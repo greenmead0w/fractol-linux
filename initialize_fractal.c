@@ -9,12 +9,14 @@ static void handle_error(t_fractal *fractal, int error_code)
         free(fractal->mlx_connection);
     }
     perror("Unsuccessful malloc");
+    //exit(EXIT_SUCCESS);
 }
 
 static void data_init(t_fractal *fractal)
 {
     fractal->threshold = 4;
     fractal->max_iteration = 42;
+    fractal->zoom_level = 1;
 }
 
 static void event_init(t_fractal *fractal)
@@ -22,9 +24,9 @@ static void event_init(t_fractal *fractal)
     //keyboard
     mlx_hook(fractal->mlx_window, KeyPress, KeyPressMask, key_press, fractal);
     //mouse
-    mlx_hook(fractal->mlx_window, ButtonPress, ButtonPressMask, mouse, fractal);
+    //mlx_hook(fractal->mlx_window, ButtonPress, ButtonPressMask, mouse, fractal);
     //close window
-    mlx_hook(fractal->mlx_window, DestroyNotify, StructureNotifyMask, close_window, fractal);
+    //mlx_hook(fractal->mlx_window, DestroyNotify, StructureNotifyMask, close_window, fractal);
 
 
 }

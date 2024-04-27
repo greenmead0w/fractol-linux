@@ -13,6 +13,8 @@
 #define WIDTH 800
 #define HEIGHT 800
 #define NAME "Fractal"
+#define ZOOM_IN 5
+#define ZOOM_OUT 4
 
 
 // Image struct
@@ -31,9 +33,13 @@ typedef struct s_fractal
     void *mlx_connection;
     void *mlx_window;
     t_image image;
+    char *type;
     //TO DO: hooks variables to be added:
     double threshold;
     int max_iteration;
+    double zoom_level;
+    double j_real;
+    double j_imaginary;
 }               t_fractal;
 
 //complex number struct
@@ -53,7 +59,7 @@ void render_fractal(t_fractal *fractal);
 //events.c
 int key_press(int key, t_fractal *fractal);
 int close_window(t_fractal *fractal);
-int mouse(int button, int x, int y, t_fractal *fractal);
+//int mouse(int button, int x, int y, t_fractal *fractal);
 
 
 //color palette:

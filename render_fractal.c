@@ -38,6 +38,20 @@ static double rescale(double unscaled_num, double new_min, double new_max, doubl
     return ((new_max - new_min) * (unscaled_num - old_min) / (old_max - old_min) + new_min);
 } 
 
+static void set_type(t_complex *z, t_complex *c, t_fractal *fractal)
+{
+    if (ft_strncmp(fractal->type, "julia", 5) == 0)
+    {
+        c->real = fractal->j_real;
+        c->imaginary = fractal->j_imaginary;
+    }
+    else
+    {
+        c->real = z->real;
+        c->imaginary = z->imaginary;
+    }
+}
+
 static void pixel_op(int pixel_x, int pixel_y, t_fractal *fractal)
 {
     t_complex z;
@@ -46,11 +60,14 @@ static void pixel_op(int pixel_x, int pixel_y, t_fractal *fractal)
     int color;
 
     i = 0;
-    z.real = 0;
-    z.imaginary = 0;
-    c.real = rescale(pixel_x, -2, +2, WIDTH);       
-    c.imaginary = rescale(pixel_y, +2, -2, HEIGHT); //(0,0) pixels == (-2, +2) mandelbrot scale
-
+    // for zooming 
+    double x_min = -2.0 * fractal->zoom_level;
+    double x_max = +2.0 * fractal->zoom_level;
+    double y_min = +2.0 * fractal->zoom_level;
+    double y_max = -2.0 * fractal->zoom_level;
+    z.real = rescale(pixel_x, x_min, x_max, WIDTH);       
+    z.imaginary = rescale(pixel_y, y_min, y_max, HEIGHT); //(0,0) pixels == (-2, +2) mandelbrot scale
+    set_type(&z, &c, fractal);
     while( i < fractal->max_iteration)
     {
         //do mandelbrot equation
