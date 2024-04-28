@@ -13,8 +13,13 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <unistd.h>
+# include <stdbool.h>
+# include <stdarg.h>
+# include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_list
 {
@@ -67,5 +72,12 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_itoa(int n);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
+
+// ft_printf
+int		putchar_f(int c);
+int		putstr_f(char *ptr);
+int		putaddress_f(unsigned long n);
+int		putnbr_f(long n, unsigned short base, bool isuppercase);
+int		ft_printf(const char *format, ...);
 
 #endif

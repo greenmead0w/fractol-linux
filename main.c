@@ -53,14 +53,14 @@ static int is_valid(int argc, char **argv)
 if (!((argc == 2 && ft_strncmp(argv[1], "mandelbrot", 10) == 0) || 
       (argc == 4 && ft_strncmp(argv[1], "julia", 5) == 0))) 
     {
-        printf("valid input must be ./fractol mandelbrot or ./fractol julia <real value> <imaginary value>\n");
+        ft_printf("valid input must be ./fractol mandelbrot or ./fractol julia <real value> <imaginary value>\n");
         return 0;
     }
     if (argc == 4) 
     {
         if (!check_digit(argv[2]) || !check_digit(argv[3]))
         {
-            printf("valid input for Julia only has numbers\n");
+            ft_printf("valid input for Julia only has numbers\n");
             return 7;
         } 
     }
@@ -79,13 +79,13 @@ int main (int argc, char **argv)
 	else
     {
 		fractal.type = argv[1];
-        printf("valid input\n");
+        ft_printf("valid input\n");
 		if (argc == 4)
 		{
 			fractal.j_real = ascii_to_double(argv[2], 1.0, 1, 0);
         	fractal.j_imaginary = ascii_to_double(argv[3], 1.0, 1, 0);
-        	printf("real number is: %f\n", fractal.j_real);
-        	printf("imaginary number is: %f\n", fractal.j_imaginary);
+        	ft_printf("real number is: %f\n", fractal.j_real);
+        	ft_printf("imaginary number is: %f\n", fractal.j_imaginary);
 		}
         initialize(&fractal);
         render_fractal(&fractal);
