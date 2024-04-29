@@ -16,7 +16,9 @@ static void data_init(t_fractal *fractal)
 {
     fractal->threshold = 4;
     fractal->max_iteration = 42;
-    fractal->zoom_level = 1;
+    //fractal->zoom_level = 1.0;
+    fractal->range_max = 2.0;
+    fractal->range_min = -2.0;
 }
 
 static void event_init(t_fractal *fractal)
@@ -24,9 +26,9 @@ static void event_init(t_fractal *fractal)
     //keyboard
     mlx_hook(fractal->mlx_window, KeyPress, KeyPressMask, key_press, fractal);
     //mouse
-    //mlx_hook(fractal->mlx_window, ButtonPress, ButtonPressMask, mouse, fractal);
+    mlx_mouse_hook(fractal->mlx_window, mouse_hook, fractal);
     //close window
-    //mlx_hook(fractal->mlx_window, DestroyNotify, StructureNotifyMask, close_window, fractal);
+    mlx_hook(fractal->mlx_window, DestroyNotify, StructureNotifyMask, close_window, fractal);
 
 
 }

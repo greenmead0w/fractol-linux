@@ -12,7 +12,7 @@
 
 #define WIDTH 800
 #define HEIGHT 800
-#define NAME "Fractal"
+#define NAME "Fractol"
 #define ZOOM_IN 5
 #define ZOOM_OUT 4
 
@@ -37,7 +37,11 @@ typedef struct s_fractal
     //TO DO: hooks variables to be added:
     double threshold;
     int max_iteration;
-    double zoom_level;
+    //double zoom_level;
+    double range_max;
+    double range_min;
+    double shift_x;
+    double shift_y;
     double j_real;
     double j_imaginary;
 }               t_fractal;
@@ -59,7 +63,7 @@ void render_fractal(t_fractal *fractal);
 //events.c
 int key_press(int key, t_fractal *fractal);
 int close_window(t_fractal *fractal);
-//int mouse(int button, int x, int y, t_fractal *fractal);
+int mouse_hook(int button, int x, int y, t_fractal *fractal);
 
 
 //color palette:

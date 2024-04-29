@@ -36,6 +36,7 @@ static double rescale(double unscaled_num, double new_min, double new_max, doubl
 {
     double old_min = 0;
     return ((new_max - new_min) * (unscaled_num - old_min) / (old_max - old_min) + new_min);
+    
 } 
 
 static void set_type(t_complex *z, t_complex *c, t_fractal *fractal)
@@ -61,12 +62,12 @@ static void pixel_op(int pixel_x, int pixel_y, t_fractal *fractal)
 
     i = 0;
     // for zooming 
-    double x_min = -2.0 * fractal->zoom_level;
-    double x_max = +2.0 * fractal->zoom_level;
-    double y_min = +2.0 * fractal->zoom_level;
-    double y_max = -2.0 * fractal->zoom_level;
-    z.real = rescale(pixel_x, x_min, x_max, WIDTH);       
-    z.imaginary = rescale(pixel_y, y_min, y_max, HEIGHT); //(0,0) pixels == (-2, +2) mandelbrot scale
+    //double x_min = -2.0 * fractal->zoom_level;
+   // double x_max = +2.0 * fractal->zoom_level;
+    //double y_min = +2.0 * fractal->zoom_level;
+    //double y_max = -2.0 * fractal->zoom_level;
+    z.real = rescale(pixel_x, fractal->range_min, fractal->range_max, WIDTH) + fractal->shift_x;       
+    z.imaginary = rescale(pixel_y, fractal->range_max, fractal->range_min, HEIGHT) + fractal->shift_y ; //(0,0) pixels == (-2, +2) mandelbrot scale
     set_type(&z, &c, fractal);
     while( i < fractal->max_iteration)
     {
